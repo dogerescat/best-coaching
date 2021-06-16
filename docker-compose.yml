@@ -1,0 +1,19 @@
+version: '3'
+services:
+  api:
+    build: ./backend
+    container_name: goapi
+    ports:
+      - 8080:8080
+    volumes:
+      - ./backend/api/src:/app/src
+    working_dir: /app/src
+    tty: true
+    depends_on: 
+      - db
+    command: go run main.go
+    networks: 
+      - goapp
+networks: 
+    goapp:
+      external: true
